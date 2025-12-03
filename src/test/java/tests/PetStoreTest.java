@@ -130,4 +130,41 @@ public class PetStoreTest
         assertTrue(Numbers.isEven(number));
     }
 
+    /**
+     * The following will test the exception classes which
+     * was not being tested previously, resulting in
+     * much lower coverage
+     */
+    @Test
+    @DisplayName("Pet without store ID")
+    public void noStoreIDTest() {
+        Cat sphynx = new Cat(AnimalType.DOMESTIC, Skin.UNKNOWN, Gender.FEMALE, Breed.SPHYNX,
+                new BigDecimal("100.00"));
+        Exception exception = assertThrows(PetNotFoundSaleException.class, () -> {
+            petStore.soldPetItem(sphynx);
+        });
+
+        assertEquals("The Pet is not part of the pet store!!", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Duplicate cat in petstore on sale")
+    public void duplicateCatTest() {
+        Cat sphynx = new Cat(AnimalType.DOMESTIC, Skin.UNKNOWN, Gender.FEMALE, Breed.SPHYNX,
+                new BigDecimal("100.00"),2);
+        Cat sphynx2 = new Cat(AnimalType.WILD, Skin.FUR, Gender.MALE, Breed.SPHYNX,
+                new BigDecimal("777.77"),2);
+
+        petStore.addPetInventoryItem(sphynx);
+        petStore.addPetInventoryItem(sphynx2);
+
+        Exception exception = assertThrows(DuplicatePetStoreRecordException.class, () -> {
+            petStore.soldPetItem(sphynx);
+        });
+
+        assertTrue(exception.getMessage().contains("Duplicate Cat record"));
+        assertTrue(exception.getMessage().contains("[2]"));
+    }
+
+
 }
