@@ -155,7 +155,7 @@ public class PetStoreTest
     public void duplicateCatTest() {
         Cat sphynx = new Cat(AnimalType.DOMESTIC, Skin.UNKNOWN, Gender.FEMALE, Breed.SPHYNX,
                 new BigDecimal("100.00"),2);
-        Cat sphynx2 = new Cat(AnimalType.WILD, Skin.FUR, Gender.MALE, Breed.SPHYNX,
+        Cat sphynx2 = new Cat(AnimalType.DOMESTIC, Skin.FUR, Gender.MALE, Breed.SPHYNX,
                 new BigDecimal("777.77"),2);
 
         petStore.addPetInventoryItem(sphynx);
