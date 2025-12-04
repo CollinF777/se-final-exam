@@ -165,8 +165,7 @@ public class PetStoreTest
             petStore.soldPetItem(sphynx);
         });
 
-        assertTrue(exception.getMessage().contains("Duplicate Cat record"));
-        assertTrue(exception.getMessage().contains("[2]"));
+        assertEquals("Duplicate Cat record store id [2]", exception.getMessage());
     }
 
     /**
