@@ -133,12 +133,17 @@ public class PetStore
                                 && (p.getPetStoreId() != petStoreId)))
                         .collect(Collectors.toList());
                 break;
-            default: //remove the dog
+            case DOG: //remove the dog
                 this.petsForSale = this.petsForSale.stream()
                         .filter(p -> ((p instanceof Dog)
                                 && (p.getPetStoreId() != petStoreId)))
                         .collect(Collectors.toList());
-
+                break;
+            default: // remove the snake
+                this.petsForSale = this.petsForSale.stream()
+                        .filter(p -> ((p instanceof Snake)
+                                && (p.getPetStoreId() != petStoreId)))
+                        .collect(Collectors.toList());
                 break;
         }
         this.petsForSale.addAll(otherPets);
